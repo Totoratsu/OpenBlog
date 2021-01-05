@@ -4,27 +4,27 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
 @ObjectType()
 @Entity()
 export class User extends BaseEntity {
-    @Field()
-    @PrimaryGeneratedColumn()
-    id!: number;
+	@Field()
+	@PrimaryGeneratedColumn()
+	id!: number;
 
-    @Field()
-    @Column()
-    email!: string;
+	@Field()
+	@Column()
+	email!: string;
 
-    @Field()
-    @Column()
-    username!: string;
+	@Field()
+	@Column()
+	username!: string;
 
-    @Field()
-    @Column()
-    password!: string;
+	@Field()
+	@Column()
+	password!: string;
 
-    constructor(username: string, email: string, password: string) {
-        super();
+	constructor(username: string, email: string, password: string) {
+		super();
 
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
 }

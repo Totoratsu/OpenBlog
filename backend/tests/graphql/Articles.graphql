@@ -1,0 +1,13 @@
+mutation {
+	createArticle(
+		fields: {
+			title: "cronicas de uwu"
+			description: "no se, un test"
+			content: "asadssddsdasdasdsdsaddgdgdgdgdgdgdgdgdgdsadsaddadadadadadda"
+			author: 1
+		}
+	) {
+		title
+	}
+	deleteArticle(id: 1)
+}

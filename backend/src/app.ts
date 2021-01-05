@@ -7,7 +7,7 @@ import cors from 'cors';
 
 import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
-import { PingResolver } from './resolvers/PingResolver';
+import { ArticleResolver } from './resolvers/ArticleResolvers';
 
 const port = process.env.PORT || 65000;
 async function main() {
@@ -24,13 +24,12 @@ async function main() {
 	// Init Apollo Server
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
-			resolvers: [PingResolver, UserResolver],
+			resolvers: [UserResolver, ArticleResolver],
 			validate: false,
 		}),
 		context: ({ req, res }) => ({ req, res }),
 	});
 	apolloServer.applyMiddleware({ app, path: '/api' });
-
 
 	app.listen(port, () => {
 		console.log(`Server running on port ${port}`);
