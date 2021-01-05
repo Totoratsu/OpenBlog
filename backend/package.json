@@ -1,0 +1,49 @@
+{
+	"name": "backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"start": "node build/src/app",
+		"dev": "nodemon",
+		"build": "tsc",
+		"ts:node": "ts-node src/app.ts",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier --write ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Totoratsu/Toto-s-DevBlog.git"
+	},
+	"author": "Totoratsu",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Totoratsu/Toto-s-DevBlog/issues"
+	},
+	"homepage": "https://github.com/Totoratsu/Toto-s-DevBlog#readme",
+	"dependencies": {
+		"apollo-server-express": "^2.19.1",
+		"argon2": "^0.27.1",
+		"class-validator": "^0.12.2",
+		"cors": "^2.8.5",
+		"dotenv-safe": "^8.2.0",
+		"express": "^4.17.1",
+		"pg": "^8.5.1",
+		"reflect-metadata": "^0.1.13",
+		"type-graphql": "^1.1.1",
+		"typeorm": "^0.2.29"
+	},
+	"devDependencies": {
+		"@types/dotenv-safe": "^8.1.1",
+		"@types/express": "^4.17.9",
+		"@types/node": "^14.14.20",
+		"@typescript-eslint/eslint-plugin": "^4.12.0",
+		"@typescript-eslint/parser": "^4.12.0",
+		"eslint": "^7.17.0",
+		"nodemon": "^2.0.6",
+		"prettier": "^2.2.1",
+		"ts-node": "^9.1.1",
+		"typescript": "^4.1.3"
+	}
+}
