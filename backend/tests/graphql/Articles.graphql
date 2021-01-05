@@ -1,5 +1,5 @@
 mutation {
-	createArticle(
+	createPost(
 		fields: {
 			title: "cronicas de uwu"
 			description: "no se, un test"
@@ -9,5 +9,5 @@ mutation {
 	) {
 		title
 	}
-	deleteArticle(id: 1)
+	deletePost(id: 1)
 }

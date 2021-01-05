@@ -5,14 +5,14 @@ import {
 	Column,
 	BaseEntity,
 	OneToOne,
-	JoinTable,
 	JoinColumn,
+	ManyToOne,
 } from 'typeorm';
 import { User } from './UserEntity';
 
 @ObjectType()
 @Entity()
-export class Article extends BaseEntity {
+export class Post extends BaseEntity {
 	@Field()
 	@PrimaryGeneratedColumn()
 	id!: number;
@@ -30,7 +30,7 @@ export class Article extends BaseEntity {
 	content!: string;
 
 	@Field()
-	@OneToOne(() => User)
+	@ManyToOne(() => User)
 	@JoinColumn()
 	author!: User;
 
