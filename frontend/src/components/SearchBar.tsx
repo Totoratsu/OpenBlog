@@ -14,7 +14,7 @@ const SearchBar = ({ className }: props) => {
                 aria-describedby="basic-addon2"
             />
             <InputGroup.Append>
-                <Button variant="outline-secondary">Search</Button>
+                <Button variant="outline-primary">Search</Button>
             </InputGroup.Append>
         </InputGroup>
     )
