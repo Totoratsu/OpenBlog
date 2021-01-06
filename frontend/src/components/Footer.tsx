@@ -1,9 +1,9 @@
 import React from 'react';
 import { Col, Container, ListGroup, Row } from 'react-bootstrap';
 
-const Footer = (): JSX.Element => {
+const Footer = ({ className }: { className?: string }): JSX.Element => {
 	return (
-		<footer>
+		<footer className={className}>
 			<Container>
 				<p>Totoratsu 2021</p>
 				<Row>

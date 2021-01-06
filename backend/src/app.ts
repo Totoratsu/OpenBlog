@@ -8,6 +8,7 @@ import cors from 'cors';
 import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
 import { PostResolver } from './resolvers/PostResolvers';
+import { IndexResolver } from './resolvers/IndexResolvers';
 
 const port = process.env.PORT || 65000;
 async function main() {
@@ -24,7 +25,7 @@ async function main() {
 	// Init Apollo Server
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
-			resolvers: [UserResolver, PostResolver],
+			resolvers: [UserResolver, PostResolver, IndexResolver],
 			validate: false,
 		}),
 		context: ({ req, res }) => ({ req, res }),

@@ -5,7 +5,7 @@ import { Container as _Container } from 'react-bootstrap';
 import Header from './Header';
 
 interface props {
-	children: JSX.Element;
+	children: JSX.Element[];
 	title?: string;
 }
 

@@ -5,7 +5,7 @@ import { Post } from '../types';
 import MainContainer from '../components/MainContainer';
 import SearchBar from '../components/SearchBar';
 import { sendQuery } from '../libs/graphql';
-import PostBox from '../components/PostCard';
+import PostCard from '../components/PostCard';
 import { Col, Row, Container } from 'react-bootstrap';
 import Footer from '../components/Footer';
 
@@ -28,7 +28,7 @@ const index = ({ posts }: { posts: Post[] }): JSX.Element => {
 			<Row>
 				{posts.map((post, i) => (
 					<Col md={4} className="mt-4 mb-4" key={i}>
-						<PostBox item={post} />
+						<PostCard item={post} />
 					</Col>
 				))}
 			</Row>
