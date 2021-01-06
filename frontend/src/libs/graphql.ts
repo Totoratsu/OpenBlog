@@ -1,17 +1,16 @@
-import ApolloClient from 'apollo-boost';
+import { request } from 'graphql-request';
 
-const client = new ApolloClient({
-    uri: 'http://localhost:65000/api'
-});
+const URI = 'http://localhost:65000/api';
 
-export async function sendQuery(query: any) {
-    try {
-        const res = await client.query({ query });
-        if (!res) return false;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function sendQuery(query: string): Promise<any> {
+	try {
+		const res = await request(URI, query);
+		if (!res) return false;
 
-        return res.data;
-    } catch (e) {
-        console.log(e);
-        throw e;
-    }
+		return res;
+	} catch (e) {
+		console.log(e);
+		throw e;
+	}
 }

@@ -85,9 +85,7 @@ export class PostResolver {
 	}
 
 	@Query(() => [Post])
-	async Posts(
-		@Arg('limit', () => Int) limit: number
-	): Promise<Post[]> {
+	async Posts(@Arg('limit', () => Int) limit: number): Promise<Post[]> {
 		return await this.repo.find({ relations: ['author'], take: limit });
 	}
 }
