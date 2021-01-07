@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
+import Link from 'next/link';
 
-import { Post } from '../types';
+import { IPost } from '../types';
 
-const PostCard = ({ item }: { item: Post }): JSX.Element => {
+const PostCard = ({ item }: { item: IPost }): JSX.Element => {
 	return (
 		<Container className="ml-0">
 			<Card>
@@ -14,6 +15,11 @@ const PostCard = ({ item }: { item: Post }): JSX.Element => {
 				<Card.Body>
 					<Card.Title className="text-center">{item.title}</Card.Title>
 					<Card.Text>{item.description}</Card.Text>
+					<Link href={`post/${item.id}`}>
+						<Card.Link>
+							<p className="text-center p-0 m-0">Read Post</p>
+						</Card.Link>
+					</Link>
 					<Card.Text className="text-muted">{item.author.username}</Card.Text>
 				</Card.Body>
 			</Card>

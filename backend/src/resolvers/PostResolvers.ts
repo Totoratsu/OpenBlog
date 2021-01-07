@@ -88,4 +88,12 @@ export class PostResolver {
 	async Posts(@Arg('limit', () => Int) limit: number): Promise<Post[]> {
 		return await this.repo.find({ relations: ['author'], take: limit });
 	}
+
+	@Query(() => Post)
+	async Post(@Arg('id', () => Int) id: number): Promise<Post | boolean> {
+		const post = await this.repo.findOne(id, { relations: ['author'] });
+		if (!post) return false;
+
+		return post;
+	}
 }

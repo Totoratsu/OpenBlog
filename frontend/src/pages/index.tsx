@@ -1,7 +1,8 @@
 import React from 'react';
 import { gql } from 'graphql-request';
+import Link from 'next/link';
 
-import { Post } from '../types';
+import { IPost } from '../types';
 import MainContainer from '../components/MainContainer';
 import SearchBar from '../components/SearchBar';
 import { sendQuery } from '../libs/graphql';
@@ -9,7 +10,7 @@ import PostCard from '../components/PostCard';
 import { Col, Row, Container } from 'react-bootstrap';
 import Footer from '../components/Footer';
 
-const index = ({ posts }: { posts: Post[] }): JSX.Element => {
+const index = ({ posts }: { posts: IPost[] }): JSX.Element => {
 	return (
 		<MainContainer>
 			<main>
@@ -32,16 +33,26 @@ const index = ({ posts }: { posts: Post[] }): JSX.Element => {
 					</Col>
 				))}
 			</Row>
+
+			<br />
+			<Link href="posts">
+				<a>
+					<p className="text-center">More posts</p>
+				</a>
+			</Link>
+			<br />
+
 			<hr />
 			<Footer />
 		</MainContainer>
 	);
 };
 
-export async function getStaticProps(): Promise<{ props: { posts: Post[] } }> {
+export async function getStaticProps(): Promise<{ props: { posts: IPost[] } }> {
 	const posts = await sendQuery(gql`
 		{
 			Posts(limit: 3) {
+				id
 				title
 				description
 				author {

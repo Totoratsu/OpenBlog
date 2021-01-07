@@ -1,13 +1,13 @@
-export interface Post {
-	id: number;
+export interface IPost {
+	id: number | string;
 	title: string;
 	description: string;
 	content: string;
-	author: User;
+	author: IUser;
 }
 
-export interface User {
-	id: number;
+export interface IUser {
+	id: number | string;
 	username: string;
 	password: string;
 	email: string;

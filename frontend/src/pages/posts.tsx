@@ -7,11 +7,11 @@ import MainContainer from '../components/MainContainer';
 import SearchBar from '../components/SearchBar';
 import { sendQuery } from '../libs/graphql';
 import PostCard from '../components/PostCard';
-import { Post } from '../types';
+import { IPost } from '../types';
 
 interface IProps {
 	tags: string[];
-	posts: Post[];
+	posts: IPost[];
 }
 
 const posts = ({ tags, posts }: IProps): JSX.Element => {
@@ -52,6 +52,7 @@ export async function getStaticProps(): Promise<{ props: IProps }> {
 		{
 			Tags
 			Posts(limit: 0) {
+				id
 				title
 				description
 				author {
