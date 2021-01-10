@@ -6,6 +6,7 @@ import {
 	Query,
 	InputType,
 	Field,
+	Authorized,
 } from 'type-graphql';
 import { getRepository } from 'typeorm';
 
@@ -47,6 +48,7 @@ export class PostResolver {
 	repo = getRepository(Post);
 	userRepo = getRepository(User);
 
+	//@Authorized()
 	@Mutation(() => Post)
 	async createPost(
 		@Arg('fields', () => PostInput) fields: PostInput
@@ -60,12 +62,14 @@ export class PostResolver {
 		return await this.repo.save(newPost);
 	}
 
+	//@Authorized()
 	@Mutation(() => Boolean)
 	async deletePost(@Arg('id', () => Int) id: number): Promise<boolean> {
 		await this.repo.delete(id);
 		return true;
 	}
 
+	//@Authorized()
 	@Mutation(() => Boolean)
 	async updatePost(
 		@Arg('id', () => Int) id: number,

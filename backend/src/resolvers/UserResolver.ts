@@ -1,4 +1,4 @@
-import { verify } from 'argon2';
+import { verify, hash } from 'argon2';
 import {
 	Resolver,
 	Mutation,
@@ -44,7 +44,7 @@ export class UserResolver {
 		@Arg('fields', () => UserInput) fields: UserInput
 	): Promise<User> {
 		const { username, password, email } = fields;
-		const newUser = new User(username, email, password);
+		const newUser = new User(username, email, await hash(password));
 		return await this.repo.save(newUser);
 	}
 
@@ -75,5 +75,16 @@ export class UserResolver {
 	@Query(() => [User])
 	async Users(): Promise<User[]> {
 		return await this.repo.find();
+	}
+
+	@Mutation(() => User, { nullable: true })
+	async userLogin(
+		@Arg('email', () => String) email: string,
+		@Arg('password', () => String) password: string
+	): Promise<User | null> {
+		const user = await this.repo.findOne({ email });
+		if (!user || verify(user.password, password)) return null;
+
+		return user;
 	}
 }

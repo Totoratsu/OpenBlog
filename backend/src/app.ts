@@ -4,39 +4,73 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { config } from 'dotenv-safe';
 import cors from 'cors';
+import * as jwt from 'express-jwt';
+import session from 'express-session';
+import connectRedis from 'connect-redis';
 
 import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
 import { PostResolver } from './resolvers/PostResolvers';
 import { IndexResolver } from './resolvers/IndexResolvers';
+import { redis } from './redis';
 
-const port = process.env.PORT || 65000;
+const {
+	PORT = 65000,
+	CORS_ORIGIN = `http://localhost:${PORT}`,
+	NODE_ENV = 'dev',
+} = process.env;
 async function main() {
 	const app = express();
+	const RedisStore = connectRedis(session);
 
-	if (process.env.NODE_ENV != 'pro' || !process.env.NODE_ENV)
-		config({ allowEmptyValues: true });
+	if (NODE_ENV != 'pro' || !NODE_ENV) config({ allowEmptyValues: true });
 
 	// Middlewares
-	app.use(cors());
-
-	await connectDB(); // Connect to Database
+	app.use(
+		cors({
+			credentials: true,
+			origin: CORS_ORIGIN,
+		})
+	);
+	app.use(
+		session({
+			store: new RedisStore({
+				client: redis,
+			}),
+			name: 'tdevblog',
+			secret: 'aslkdfjoiq12312',
+			resave: false,
+			saveUninitialized: false,
+			cookie: {
+				httpOnly: true,
+				secure: NODE_ENV === 'production',
+				maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+			},
+		})
+	);
 
 	// Init Apollo Server
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
 			resolvers: [UserResolver, PostResolver, IndexResolver],
 			validate: false,
+			authChecker: ({ context: { req } }): boolean => {
+				if (req.session.userId) return true;
+
+				return false;
+			},
 		}),
 		context: ({ req, res }) => ({ req, res }),
 	});
 	apolloServer.applyMiddleware({ app, path: '/api' });
 
-	app.listen(port, () => {
-		console.log(`Server running on port ${port}`);
+	app.listen(PORT, async () => {
+		console.log(`Server running on port ${PORT}`);
 
-		if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev')
-			console.log(`\tGraphql server in http://localhost:${port}/api`);
+		await connectDB(); // Connect to Database
+
+		if (!NODE_ENV || NODE_ENV === 'dev')
+			console.log(`\tGraphql server in http://localhost:${PORT}/api`);
 	});
 }
 
