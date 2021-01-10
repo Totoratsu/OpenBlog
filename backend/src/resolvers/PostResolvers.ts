@@ -6,10 +6,11 @@ import {
 	Query,
 	InputType,
 	Field,
-	Authorized,
+	UseMiddleware,
 } from 'type-graphql';
 import { getRepository } from 'typeorm';
 
+import { isAuth } from '../middlewares/UserMiddlewares';
 import { Post } from '../entities/PostEntity';
 import { User } from '../entities/UserEntity';
 
@@ -48,7 +49,7 @@ export class PostResolver {
 	repo = getRepository(Post);
 	userRepo = getRepository(User);
 
-	//@Authorized()
+	@UseMiddleware(isAuth)
 	@Mutation(() => Post)
 	async createPost(
 		@Arg('fields', () => PostInput) fields: PostInput
@@ -62,14 +63,14 @@ export class PostResolver {
 		return await this.repo.save(newPost);
 	}
 
-	//@Authorized()
+	@UseMiddleware(isAuth)
 	@Mutation(() => Boolean)
 	async deletePost(@Arg('id', () => Int) id: number): Promise<boolean> {
 		await this.repo.delete(id);
 		return true;
 	}
 
-	//@Authorized()
+	@UseMiddleware(isAuth)
 	@Mutation(() => Boolean)
 	async updatePost(
 		@Arg('id', () => Int) id: number,

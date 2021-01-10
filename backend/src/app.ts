@@ -4,7 +4,6 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { config } from 'dotenv-safe';
 import cors from 'cors';
-import * as jwt from 'express-jwt';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 
@@ -18,7 +17,9 @@ const {
 	PORT = 65000,
 	CORS_ORIGIN = `http://localhost:${PORT}`,
 	NODE_ENV = 'dev',
+	SESSION_SECRET = 'secret123',
 } = process.env;
+
 async function main() {
 	const app = express();
 	const RedisStore = connectRedis(session);
@@ -38,13 +39,13 @@ async function main() {
 				client: redis,
 			}),
 			name: 'tdevblog',
-			secret: 'aslkdfjoiq12312',
+			secret: SESSION_SECRET,
 			resave: false,
 			saveUninitialized: false,
 			cookie: {
 				httpOnly: true,
-				secure: NODE_ENV === 'production',
-				maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+				secure: NODE_ENV === 'pro',
+				maxAge: 604800000, // 7 days
 			},
 		})
 	);
@@ -54,11 +55,6 @@ async function main() {
 		schema: await buildSchema({
 			resolvers: [UserResolver, PostResolver, IndexResolver],
 			validate: false,
-			authChecker: ({ context: { req } }): boolean => {
-				if (req.session.userId) return true;
-
-				return false;
-			},
 		}),
 		context: ({ req, res }) => ({ req, res }),
 	});
