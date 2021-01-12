@@ -44,13 +44,19 @@ class UserUpdateInput {
 export class UserResolver {
 	repo = getRepository(User);
 
-	@Mutation(() => User)
+	@Mutation(() => User, { nullable: true })
 	async createUser(
 		@Arg('fields', () => UserInput) fields: UserInput
-	): Promise<User> {
+	): Promise<User | null> {
 		const { username, password, email } = fields;
+
+		const user = await this.repo.findOne({ email });
+		if (user) throw new Error('User Already Exists');
+
 		const newUser = new User(username, email, await hash(password));
-		return await this.repo.save(newUser);
+		await this.repo.save(newUser);
+
+		return newUser;
 	}
 
 	@UseMiddleware(isAuth)
@@ -81,10 +87,12 @@ export class UserResolver {
 
 	@Query(() => [User])
 	async Users(): Promise<User[]> {
-		return await this.repo.find();
+		const users = await this.repo.find();
+
+		return users || new Array<User>();
 	}
 
-	@Query(() => User, { nullable: true })
+	/* @Query(() => User, { nullable: true })
 	async cookieUser(@Ctx() ctx: MyContext): Promise<User | null> {
 		if (!ctx.req.session.userId) return null;
 
@@ -92,7 +100,7 @@ export class UserResolver {
 		if (!user) return null;
 
 		return user;
-	}
+	} */
 
 	@Mutation(() => User, { nullable: true })
 	async userLogin(
@@ -106,5 +114,17 @@ export class UserResolver {
 		ctx.req.session.userId = user.id;
 
 		return user;
+	}
+
+	@Mutation(() => Boolean)
+	async userLogout(@Ctx() ctx: MyContext): Promise<boolean> {
+		return new Promise((res, rej) =>
+			ctx.req.session.destroy((err: Error) => {
+				if (err) return rej(false);
+
+				ctx.res.clearCookie('tdevblog');
+				return res(true);
+			})
+		);
 	}
 }

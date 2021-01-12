@@ -4,12 +4,12 @@ import { getRepository } from 'typeorm';
 import { MyContext } from '../types/MyContext';
 import { User } from '../entities/UserEntity';
 
-const repo = getRepository(User);
-
 export const isAuth: MiddlewareFn<MyContext> = async (
 	{ context: { req } },
 	next
 ) => {
+	const repo = getRepository(User);
+
 	if (!req.session.userId) throw new Error('Unauthorized');
 
 	const user = repo.findOne(req.session.userId);
