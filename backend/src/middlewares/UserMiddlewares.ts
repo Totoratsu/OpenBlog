@@ -1,7 +1,7 @@
 import { MiddlewareFn } from 'type-graphql';
 import { getRepository } from 'typeorm';
 
-import { MyContext } from '../types/MyContext';
+import { MyContext } from '../types/main';
 import { User } from '../entities/UserEntity';
 
 export const isAuth: MiddlewareFn<MyContext> = async (

@@ -11,6 +11,7 @@ import {
 	getComplexity,
 	simpleEstimator,
 } from 'graphql-query-complexity';
+import { Container } from 'typedi';
 
 import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
@@ -59,6 +60,7 @@ async function main() {
 	const schema = await buildSchema({
 		resolvers: [UserResolver, PostResolver, IndexResolver],
 		validate: false,
+		container: Container,
 	});
 	const apolloServer = new ApolloServer({
 		schema,
@@ -77,7 +79,7 @@ async function main() {
 								simpleEstimator({ defaultComplexity: 1 }),
 							],
 						});
-						if (complexity > 20) {
+						if (complexity > 15) {
 							throw new Error(
 								`Sorry, too complicated query! ${complexity} is over 20 that is the max allowed complexity.`
 							);

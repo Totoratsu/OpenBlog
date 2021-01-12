@@ -3473,6 +3473,11 @@ type-is@^1.6.16, type-is@~1.6.17, type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
+typedi@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.9.1.tgz#5ed18adcd0b1739afc9f15f98c0b54e5791a787a"
+  integrity sha512-g0e4wPlSJboWstMQ2sOITs8cLL51/FnTSC6xnE+8oHERErdt6vUyg6p0mg7s00vyZpNJZ9VRnd6xuxmvABvIpw==
+
 typeorm@^0.2.29:
   version "0.2.29"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.29.tgz#401289dc91900d72eccb26e31cdb7f0591a2272e"
