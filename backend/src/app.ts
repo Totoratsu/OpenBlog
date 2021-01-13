@@ -6,6 +6,12 @@ import { config } from 'dotenv-safe';
 import cors from 'cors';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
+import {
+	fieldExtensionsEstimator,
+	getComplexity,
+	simpleEstimator,
+} from 'graphql-query-complexity';
+import { Container } from 'typedi';
 
 import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
@@ -51,12 +57,38 @@ async function main() {
 	);
 
 	// Init Apollo Server
+	const schema = await buildSchema({
+		resolvers: [UserResolver, PostResolver, IndexResolver],
+		validate: false,
+		container: Container,
+	});
 	const apolloServer = new ApolloServer({
-		schema: await buildSchema({
-			resolvers: [UserResolver, PostResolver, IndexResolver],
-			validate: false,
-		}),
+		schema,
 		context: ({ req, res }) => ({ req, res }),
+		plugins: [
+			{
+				requestDidStart: () => ({
+					didResolveOperation({ request, document }) {
+						const complexity = getComplexity({
+							schema,
+							operationName: request.operationName,
+							query: document,
+							variables: request.variables,
+							estimators: [
+								fieldExtensionsEstimator(),
+								simpleEstimator({ defaultComplexity: 1 }),
+							],
+						});
+						if (complexity > 15) {
+							throw new Error(
+								`Sorry, too complicated query! ${complexity} is over 20 that is the max allowed complexity.`
+							);
+						}
+						//console.log('Used query complexity points:', complexity);
+					},
+				}),
+			},
+		],
 	});
 	apolloServer.applyMiddleware({ app, path: '/api' });
 
