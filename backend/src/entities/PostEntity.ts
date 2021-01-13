@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 import { User } from './UserEntity';
 
+export const Tags = ['js', 'css', 'html', 'python', 'other'];
+
 @ObjectType()
 @Entity()
 export class Post extends BaseEntity {
@@ -28,6 +30,10 @@ export class Post extends BaseEntity {
 	@Column()
 	content!: string;
 
+	@Field({ nullable: true })
+	@Column({ nullable: true })
+	tags!: string;
+
 	@Field()
 	@ManyToOne(() => User)
 	@JoinColumn()
@@ -37,7 +43,8 @@ export class Post extends BaseEntity {
 		title: string,
 		description: string,
 		content: string,
-		author: User
+		author: User,
+		tags?: string
 	) {
 		super();
 
@@ -45,5 +52,6 @@ export class Post extends BaseEntity {
 		this.description = description;
 		this.content = content;
 		this.author = author;
+		if (tags) this.tags = tags;
 	}
 }

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { IPost } from '../types';
 import MainContainer from '../components/MainContainer';
-import SearchBar from '../components/SearchBar';
+//import SearchBar from '../components/SearchBar';
 import { sendQuery } from '../libs/graphql';
 import PostCard from '../components/PostCard';
 import { Col, Row, Container } from 'react-bootstrap';

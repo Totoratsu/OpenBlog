@@ -45,8 +45,8 @@ export class UserService {
 		return true;
 	}
 
-	async find(): Promise<User[]> {
-		return (await this.repo.find()) || new Array<User>();
+	async find(limit: number): Promise<User[]> {
+		return (await this.repo.find({ take: limit })) || new Array<User>();
 	}
 
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

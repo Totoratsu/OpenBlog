@@ -45,8 +45,13 @@ export class UserResolver {
 	}
 
 	@Query(() => [User])
-	async Users(): Promise<User[]> {
-		return await this.userService.find();
+	async Users(@Arg('limit', () => Int) limit: number): Promise<User[]> {
+		return await this.userService.find(limit);
+	}
+
+	@Query(() => User)
+	async User(@Arg('id', () => Int) id: number): Promise<User | null> {
+		return await this.userService.findOne(id);
 	}
 
 	/* @Query(() => User, { nullable: true })

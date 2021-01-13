@@ -13,7 +13,7 @@ export class PostService {
 	private readonly userRepo = getRepository(User);
 
 	async createOne(fields: PostInput): Promise<Post | null> {
-		const { title, description, content, author } = fields;
+		const { title, description, content, author, tags } = fields;
 
 		const user = await this.userRepo.findOne(author);
 		if (!user) throw new Error('Invalid User');
@@ -21,7 +21,7 @@ export class PostService {
 		const post = await this.repo.findOne({ title });
 		if (post) throw new Error('Post Already exists');
 
-		const newPost = new Post(title, description, content, user);
+		const newPost = new Post(title, description, content, user, tags);
 		await this.repo.save(newPost);
 
 		return newPost;
@@ -36,14 +36,15 @@ export class PostService {
 		id: number,
 		fields: PostUpdateInput
 	): Promise<boolean | null> {
-		const Post = await this.findOne(id);
-		if (!Post) throw new Error('Post not Found');
+		const post = await this.findOne(id);
+		if (!post) throw new Error('Post not Found');
 
-		if (fields.content) Post.content = fields.content;
-		if (fields.description) Post.description = fields.description;
-		if (fields.title) Post.title = fields.title;
+		if (fields.content) post.content = fields.content;
+		if (fields.description) post.description = fields.description;
+		if (fields.title) post.title = fields.title;
+		if (fields.tags) post.tags = fields.tags;
 
-		await Post.save();
+		await post.save();
 
 		return true;
 	}
