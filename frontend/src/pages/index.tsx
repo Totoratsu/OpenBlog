@@ -20,11 +20,11 @@ const index = ({ posts }: { posts: IPost[] }): JSX.Element => {
 				</Container>
 			</main>
 
-			<Row className="justify-content-md-center">
+			{/* <Row className="justify-content-md-center">
 				<Col md={8}>
 					<SearchBar className="mt-3 mb-4 p-2" />
 				</Col>
-			</Row>
+			</Row> */}
 			<hr />
 			<Row>
 				{posts.map((post, i) => (
@@ -35,7 +35,7 @@ const index = ({ posts }: { posts: IPost[] }): JSX.Element => {
 			</Row>
 
 			<br />
-			<Link href="posts">
+			<Link href="/posts">
 				<a>
 					<p className="text-center">More posts</p>
 				</a>

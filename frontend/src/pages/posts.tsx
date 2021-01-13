@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request';
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, ListGroup, Row } from 'react-bootstrap';
 import Footer from '../components/Footer';
 
@@ -15,10 +15,31 @@ interface IProps {
 }
 
 const posts = ({ tags, posts }: IProps): JSX.Element => {
+	const [filteredList, setList] = useState(posts);
+	const [term, setTerm] = useState('');
+
+	function handleSearchBar(t: string): void {
+		setTerm(t);
+		if (t === '' || t === ' ') {
+			setList(posts);
+			return;
+		}
+
+		setList(posts.filter(({ title }) => title.includes(t)));
+	}
+
 	return (
 		<MainContainer>
-			<SearchBar className="mb-4 pb-4 mt-4 pt-4" />
 			<hr />
+			<Row className="justify-content-md-center">
+				<Col md={9}>
+					<SearchBar
+						className="mb-2 pb-2 mt-4 pt-4"
+						handler={handleSearchBar}
+						value={term}
+					/>
+				</Col>
+			</Row>
 			<Row className="mb-4 pb-4 mt-4 pt-4">
 				<Col md={2}>
 					<aside>
@@ -33,7 +54,7 @@ const posts = ({ tags, posts }: IProps): JSX.Element => {
 
 				<Col>
 					<Row>
-						{posts.map((post, i) => (
+						{filteredList.map((post, i) => (
 							<Col md={4} className="mt-4 mb-4" key={i}>
 								<PostCard item={post} />
 							</Col>

@@ -15,10 +15,10 @@ const PostCard = ({ item }: { item: IPost }): JSX.Element => {
 				<Card.Body>
 					<Card.Title className="text-center">{item.title}</Card.Title>
 					<Card.Text>{item.description}</Card.Text>
-					<Link href={`post/${item.id}`}>
-						<Card.Link>
+					<Link href={`/post/${item.id}`}>
+						<a>
 							<p className="text-center p-0 m-0">Read Post</p>
-						</Card.Link>
+						</a>
 					</Link>
 					<Card.Text className="text-muted">{item.author.username}</Card.Text>
 				</Card.Body>

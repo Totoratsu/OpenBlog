@@ -35,6 +35,8 @@ PostPage.getInitialProps = async ({
     	}
     `);
 
+	console.log(res);
+
 	return {
 		post: res.Post,
 	};
