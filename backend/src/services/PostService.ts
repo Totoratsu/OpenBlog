@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Service, Inject } from 'typedi';
+import { Service } from 'typedi';
 import { getRepository } from 'typeorm';
 
 import { Post } from '../entities/PostEntity';
@@ -8,7 +8,7 @@ import { User } from '../entities/UserEntity';
 
 @Service()
 export class PostService {
-	@Inject('POST_REPO')
+	//@Inject('POST_REPO')
 	private readonly repo = getRepository(Post);
 	private readonly userRepo = getRepository(User);
 

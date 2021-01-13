@@ -21,7 +21,7 @@ import { redis } from './redis';
 
 const {
 	PORT = 65000,
-	CORS_ORIGIN = `http://localhost:${PORT}`,
+	CORS_ORIGIN = `http://localhost:3000`, // your frontend domain
 	NODE_ENV = 'dev',
 	SESSION_SECRET = 'secret123',
 } = process.env;
@@ -79,7 +79,7 @@ async function main() {
 								simpleEstimator({ defaultComplexity: 1 }),
 							],
 						});
-						if (complexity > 15) {
+						if (complexity > 20) {
 							throw new Error(
 								`Sorry, too complicated query! ${complexity} is over 20 that is the max allowed complexity.`
 							);

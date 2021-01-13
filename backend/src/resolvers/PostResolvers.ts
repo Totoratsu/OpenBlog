@@ -11,10 +11,12 @@ import { isAuth } from '../middlewares/UserMiddlewares';
 import { Post } from '../entities/PostEntity';
 import { PostInput, PostUpdateInput } from '../types/PostTypes';
 import { PostService } from '../services/PostService';
+import { Service } from 'typedi';
 
-@Resolver()
+@Service()
+@Resolver(() => Post)
 export class PostResolver {
-	constructor(private readonly postService: PostService) { }
+	constructor(private readonly postService: PostService) {}
 
 	@UseMiddleware(isAuth)
 	@Mutation(() => Post, { nullable: true })

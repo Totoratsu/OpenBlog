@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { hash, verify } from 'argon2';
-import { Service, Inject } from 'typedi';
+import { Service /* , Inject */ } from 'typedi';
 import { getRepository } from 'typeorm';
 
 import { IUser, MyContext } from '../types/main';
@@ -9,7 +9,7 @@ import { User } from '../entities/UserEntity';
 
 @Service()
 export class UserService {
-	@Inject('USER_REPO')
+	//@Inject('USER_REPO')
 	private readonly repo = getRepository(User);
 
 	async createOne({ username, email, password }: IUser): Promise<User | null> {
