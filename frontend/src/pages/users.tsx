@@ -1,31 +1,29 @@
 import { gql } from 'graphql-request';
 import React, { useState } from 'react';
-import { Col, ListGroup, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import Footer from '../components/Footer';
 
 import MainContainer from '../components/MainContainer';
 import SearchBar from '../components/SearchBar';
 import { sendQuery } from '../libs/graphql';
-import PostCard from '../components/PostCard';
-import { IPost } from '../types';
+import { IUser } from '../types';
 
 interface IProps {
-	tags: string[];
-	posts: IPost[];
+	users: IUser[];
 }
 
-const posts = ({ tags, posts }: IProps): JSX.Element => {
-	const [filteredList, setList] = useState(posts);
+const users = ({ users }: IProps): JSX.Element => {
+	const [filteredList, setList] = useState(users);
 	const [term, setTerm] = useState('');
 
 	function handleSearchBar(t: string): void {
 		setTerm(t);
 		if (t === '' || t === ' ') {
-			setList(posts);
+			setList(users);
 			return;
 		}
 
-		setList(posts.filter(({ title }) => title.includes(t)));
+		setList(users.filter(({ username }) => username.includes(t)));
 	}
 
 	return (
@@ -43,20 +41,16 @@ const posts = ({ tags, posts }: IProps): JSX.Element => {
 			<Row className="mb-4 pb-4 mt-4 pt-4">
 				<Col md={2}>
 					<aside>
-						<h4 className="text-center">Tags</h4>
-						<ListGroup variant="flush">
-							{tags.map((tag, i) => (
-								<ListGroup.Item key={i}>{tag}</ListGroup.Item>
-							))}
-						</ListGroup>
+						<h4 className="text-center">Top Users</h4>
+						<p>I will implement this later</p>
 					</aside>
 				</Col>
 
 				<Col>
 					<Row>
-						{filteredList.map((post, i) => (
+						{filteredList.map((user, i) => (
 							<Col md={4} className="mt-4 mb-4" key={i}>
-								<PostCard item={post} />
+								<p className="text-center">{user.username}</p>
 							</Col>
 						))}
 					</Row>
@@ -71,24 +65,18 @@ const posts = ({ tags, posts }: IProps): JSX.Element => {
 export async function getStaticProps(): Promise<{ props: IProps }> {
 	const res = await sendQuery(gql`
 		{
-			Tags
-			Posts(limit: 0) {
+			Users(limit: 0) {
 				id
-				title
-				description
-				author {
-					username
-				}
+				username
 			}
 		}
 	`);
 
 	return {
 		props: {
-			tags: res.Tags,
-			posts: res.Posts,
+			users: res.Users,
 		},
 	};
 }
 
-export default posts;
+export default users;

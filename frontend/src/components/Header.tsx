@@ -1,9 +1,41 @@
 import React from 'react';
 import Link from 'next/link';
-import { Container, Navbar } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Navbar, Row, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
+import { IUserAuth } from '../types';
 
 const Header = (): JSX.Element => {
+	const user = useSelector((state: { user: IUserAuth }) => state.user);
+
+	function Auth(): JSX.Element {
+		return (
+			<Row className="d-flex justify-content-between">
+				<Col>
+					<Link href="/signin">
+						<a>Signin</a>
+					</Link>
+				</Col>
+				<Col>
+					<Link href="/signup">
+						<a>Signup</a>
+					</Link>
+				</Col>
+			</Row>
+		);
+	}
+
+	function UserPage(): JSX.Element {
+		return (
+			<p>
+				Signed in as:{' '}
+				<Link href={`/user/${user.id}`}>
+					<a>{user.username}</a>
+				</Link>
+			</p>
+		);
+	}
+
 	return (
 		<Container className="mb-4">
 			<Navbar expand="lg" variant="light">
@@ -14,7 +46,7 @@ const Header = (): JSX.Element => {
 				<Navbar.Toggle />
 				<Navbar.Collapse className="justify-content-end">
 					<Navbar.Text>
-						Signed in as: <a href="#login">Mark Otto</a>
+						{user.username === 'Guest' ? <Auth /> : <UserPage />}
 					</Navbar.Text>
 				</Navbar.Collapse>
 			</Navbar>

@@ -13,6 +13,9 @@ export class PostInput {
 	@Field()
 	content!: string;
 
+	@Field({ nullable: true })
+	tags?: string;
+
 	@Field()
 	author!: number;
 }
@@ -27,6 +30,9 @@ export class PostUpdateInput {
 
 	@Field(() => String, { nullable: true })
 	content?: string;
+
+	@Field({ nullable: true })
+	tags?: string;
 
 	@Field(() => String, { nullable: true })
 	author?: User;

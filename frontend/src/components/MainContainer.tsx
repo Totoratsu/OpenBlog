@@ -7,11 +7,12 @@ import Header from './Header';
 interface props {
 	children: JSX.Element[] | JSX.Element;
 	title?: string;
+	className?: string;
 }
 
-const MainContainer = ({ title, children }: props): JSX.Element => {
+const MainContainer = ({ title, children, className }: props): JSX.Element => {
 	return (
-		<Container>
+		<Container className={className}>
 			<Head>
 				<title>{title ? title : "Toto's DevBlog"}</title>
 			</Head>
