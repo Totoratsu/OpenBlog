@@ -2,9 +2,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
 import React from 'react';
 import type { AppProps /*, AppContext */ } from 'next/app';
+import { Provider } from 'react-redux';
+
+import { useStore } from '../libs/redux/store';
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
-	return <Component {...pageProps} />;
+	const store = useStore(pageProps.initialReduxState);
+
+	return (
+		<Provider store={store}>
+			<Component {...pageProps} />
+		</Provider>
+	);
 }
 
 // Only uncomment this method if you have blocking data requirements for
