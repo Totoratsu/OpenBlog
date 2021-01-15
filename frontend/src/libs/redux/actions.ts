@@ -1,9 +1,10 @@
-interface action {
-	type: string;
-}
+import { IAction, IUserAuth } from '../../types';
 
-export const uyserAuth = (): action => ({ type: 'AUTH' });
+export const userAuth = (userInfo: IUserAuth): IAction => ({
+	type: 'AUTH',
+	userInfo,
+});
 
-export const userLogout = (): action => ({ type: 'LOGOUT' });
+export const userLogout = (): IAction => ({ type: 'LOGOUT' });
 
-export const resetStore = (): action => ({ type: 'RESET' });
+export const resetStore = (): IAction => ({ type: 'RESET' });

@@ -1,19 +1,20 @@
 import { combineReducers } from 'redux';
+import { IAction } from '../../types';
 
 const initialState = {
 	id: 0,
-	username: '',
-	email: '',
+	username: 'Guest',
+	email: 'guest@test.xyz',
 };
 
-const userReducer = (state = initialState, { type, payload }) => {
+const userReducer = (state = initialState, { type, userInfo }: IAction) => {
 	switch (type) {
 		case 'AUTH':
 			return {
 				...state,
-				id: payload.id,
-				username: payload.username,
-				email: payload.email,
+				id: userInfo.id,
+				username: userInfo.username,
+				email: userInfo.email,
 			};
 		case 'LOGOUT':
 			return {

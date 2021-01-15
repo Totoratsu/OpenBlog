@@ -2,12 +2,16 @@ import { gql } from 'graphql-request';
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Router from 'next/router';
+import { useDispatch } from 'react-redux';
 
 import Footer from '../components/Footer';
 import MainContainer from '../components/MainContainer';
 import { sendQuery } from '../libs/graphql';
+import { userAuth } from '../libs/redux/actions';
 
 const signup = (): JSX.Element => {
+	const dispatch = useDispatch();
+
 	// User Auth
 	const [email, setEmail] = useState('');
 	const [username, setUsername] = useState('');
@@ -33,6 +37,13 @@ const signup = (): JSX.Element => {
                 }
             `);
 
+			dispatch(
+				userAuth({
+					id: res.user.id,
+					username: res.user.username,
+					email: res.user.email,
+				})
+			);
 			Router.push('/');
 		} catch (e) {
 			setError(e.response.errors[0].message);

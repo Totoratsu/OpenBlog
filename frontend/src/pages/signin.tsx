@@ -2,12 +2,16 @@ import { gql } from 'graphql-request';
 import Router from 'next/router';
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 import Footer from '../components/Footer';
 import MainContainer from '../components/MainContainer';
 import { sendQuery } from '../libs/graphql';
+import { userAuth } from '../libs/redux/actions';
 
 const signin = (): JSX.Element => {
+	const dispatch = useDispatch();
+
 	// User Auth
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -20,16 +24,25 @@ const signin = (): JSX.Element => {
 
 		try {
 			const res = await sendQuery(gql`
-                    mutation {
-                        user: userLogin(
-                            email: "${email}",
-                            password: "${password}"
-                        ){
-                            username
-                        }
-                    }
-                `);
+                mutation {
+                    user: userLogin(
+                        email: "${email}",
+                        password: "${password}"
+                    ){
+						id
+                        username
+						email
+					}
+                }
+			`);
 
+			dispatch(
+				userAuth({
+					id: res.user.id,
+					username: res.user.username,
+					email: res.user.email,
+				})
+			);
 			Router.push('/');
 		} catch (e) {
 			setError(e.response.errors[0].message);
