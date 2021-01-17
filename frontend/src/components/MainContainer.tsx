@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Container } from 'react-bootstrap';
 
 import Header from './Header';
+import Footer from './Footer';
 
 interface props {
 	children: JSX.Element[] | JSX.Element;
@@ -19,6 +20,9 @@ const MainContainer = ({ title, children, className }: props): JSX.Element => {
 			<Header />
 
 			{children}
+
+			<hr className="mt-4 pt-4" />
+			<Footer />
 		</Container>
 	);
 };

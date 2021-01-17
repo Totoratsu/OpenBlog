@@ -62,8 +62,6 @@ const posts = ({ tags, posts }: IProps): JSX.Element => {
 					</Row>
 				</Col>
 			</Row>
-			<hr />
-			<Footer className="mt-4 pt-4" />
 		</MainContainer>
 	);
 };

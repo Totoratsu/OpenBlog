@@ -3,8 +3,12 @@ import { Request, Response } from 'express';
 import { User } from '../entities/UserEntity';
 
 export interface MyContext {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	req: Request | any;
+	req: Request & {
+		session: {
+			// Cookie info
+			userId: string | number;
+		};
+	};
 	res: Response;
 }
 

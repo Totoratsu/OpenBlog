@@ -18,7 +18,7 @@ import { UserInput, UserUpdateInput } from '../types/UserTypes';
 @Service()
 @Resolver(() => User)
 export class UserResolver {
-	constructor(private readonly userService: UserService) { }
+	constructor(private readonly userService: UserService) {}
 
 	@Mutation(() => User, { nullable: true })
 	async createUser(

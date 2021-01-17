@@ -12,6 +12,7 @@ import {
 	simpleEstimator,
 } from 'graphql-query-complexity';
 import { Container } from 'typedi';
+import cookieParser from 'cookie-parser';
 
 import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
@@ -33,6 +34,7 @@ async function main() {
 	if (NODE_ENV != 'pro' || !NODE_ENV) config({ allowEmptyValues: true });
 
 	// Middlewares
+	app.use(cookieParser());
 	app.use(
 		cors({
 			credentials: true,
@@ -51,7 +53,7 @@ async function main() {
 			cookie: {
 				httpOnly: true,
 				secure: NODE_ENV === 'pro',
-				maxAge: 604800000, // 7 days
+				maxAge: 24 * 60 * 60 * 1000, // 1 days
 			},
 		})
 	);

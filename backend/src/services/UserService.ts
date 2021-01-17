@@ -64,9 +64,12 @@ export class UserService {
 		ctx: MyContext
 	): Promise<User | null> {
 		const user = await this.findOne({ email });
-		if (!user || !verify(user.password, password)) return null;
+		if (!user || !verify(user.password, password))
+			throw new Error('Invalid User');
 
 		ctx.req.session.userId = user.id;
+
+		console.log(ctx.req.session);
 
 		return user;
 	}
