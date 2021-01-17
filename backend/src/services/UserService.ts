@@ -69,8 +69,6 @@ export class UserService {
 
 		ctx.req.session.userId = user.id;
 
-		console.log(ctx.req.session);
-
 		return user;
 	}
 

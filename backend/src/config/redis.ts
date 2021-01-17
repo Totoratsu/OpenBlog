@@ -1,4 +1,4 @@
-import Redis from 'ioredis';
+import { createClient } from 'redis'
 
 const {
     REDIS_PORT = '6379',
@@ -6,10 +6,8 @@ const {
     REDIS_PASS = 'secret4redis',
 } = process.env;
 
-export const redis = new Redis({
+export const redis = createClient({
     port: parseInt(REDIS_PORT),
     host: REDIS_HOST,
-    family: 4,
     password: REDIS_PASS,
-    db: 0,
 });

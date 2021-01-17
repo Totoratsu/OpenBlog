@@ -18,7 +18,7 @@ import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
 import { PostResolver } from './resolvers/PostResolvers';
 import { IndexResolver } from './resolvers/IndexResolvers';
-import { redis } from './redis';
+import { redis } from './config/redis';
 
 const {
 	PORT = 65000,
