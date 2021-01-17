@@ -45,6 +45,7 @@ const signin = (): JSX.Element => {
 			);
 			Router.push('/');
 		} catch (e) {
+			console.log(e);
 			setError(e.response.errors[0].message);
 		}
 	}
@@ -85,8 +86,6 @@ const signin = (): JSX.Element => {
 					</Form>
 				</Col>
 			</Row>
-			<hr />
-			<Footer />
 		</MainContainer>
 	);
 };

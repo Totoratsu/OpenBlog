@@ -29,8 +29,9 @@ const UserPage = ({ user }: { user: IUser }): JSX.Element => {
 			<h1 className="text-center">{user.username}</h1>
 			<p>{user.email}</p>
 			<hr />
+			<button onClick={() => Router.push('/add')}>Add new Post</button>
+			<hr />
 			<button onClick={handleLogout}>Logout</button>
-			<Footer />
 		</MainContainer>
 	);
 };

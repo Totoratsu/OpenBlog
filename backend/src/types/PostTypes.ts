@@ -1,4 +1,4 @@
-import { Field, InputType } from 'type-graphql';
+import { Field, InputType, ID } from 'type-graphql';
 
 import { User } from '../entities/UserEntity';
 
@@ -16,7 +16,7 @@ export class PostInput {
 	@Field({ nullable: true })
 	tags?: string;
 
-	@Field()
+	@Field(() => ID)
 	author!: number;
 }
 

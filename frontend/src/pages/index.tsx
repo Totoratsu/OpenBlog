@@ -41,9 +41,6 @@ const index = ({ posts }: { posts: IPost[] }): JSX.Element => {
 				</a>
 			</Link>
 			<br />
-
-			<hr />
-			<Footer />
 		</MainContainer>
 	);
 };

@@ -110,8 +110,6 @@ const signup = (): JSX.Element => {
 					</Form>
 				</Col>
 			</Row>
-			<hr />
-			<Footer />
 		</MainContainer>
 	);
 };
