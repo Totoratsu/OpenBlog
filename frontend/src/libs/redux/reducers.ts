@@ -5,6 +5,7 @@ const initialState = {
 	id: 0,
 	username: 'Guest',
 	email: 'guest@test.xyz',
+	token: '',
 };
 
 const userReducer = (state = initialState, { type, userInfo }: IAction) => {
@@ -15,6 +16,7 @@ const userReducer = (state = initialState, { type, userInfo }: IAction) => {
 				id: userInfo.id,
 				username: userInfo.username,
 				email: userInfo.email,
+				token: userInfo.token,
 			};
 		case 'LOGOUT':
 			return {
@@ -22,6 +24,7 @@ const userReducer = (state = initialState, { type, userInfo }: IAction) => {
 				id: initialState.id,
 				username: initialState.username,
 				email: initialState.email,
+				token: initialState.token,
 			};
 		case 'RESET':
 			return initialState;

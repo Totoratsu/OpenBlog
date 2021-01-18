@@ -13,12 +13,12 @@ import { User } from '../entities/UserEntity';
 import { MyContext } from '../types/main';
 import { isAuth } from '../middlewares/UserMiddlewares';
 import { UserService } from '../services/UserService';
-import { UserInput, UserUpdateInput } from '../types/UserTypes';
+import { UserAuth, UserInput, UserUpdateInput } from '../types/UserTypes';
 
 @Service()
 @Resolver(() => User)
 export class UserResolver {
-	constructor(private readonly userService: UserService) {}
+	constructor(private readonly userService: UserService) { }
 
 	@Mutation(() => User, { nullable: true })
 	async createUser(
@@ -64,13 +64,13 @@ export class UserResolver {
 		return user;
 	} */
 
-	@Mutation(() => User, { nullable: true })
+	@Mutation(() => UserAuth, { nullable: true })
 	async userLogin(
 		@Arg('email', () => String) email: string,
-		@Arg('password', () => String) password: string,
-		@Ctx() ctx: MyContext
-	): Promise<User | null> {
-		return await this.userService.userLogin(email, password, ctx);
+		@Arg('password', () => String) password: string
+		//@Ctx() ctx: MyContext
+	): Promise<UserAuth | null> {
+		return await this.userService.userLogin(email, password /* , ctx */);
 	}
 
 	@Mutation(() => Boolean)

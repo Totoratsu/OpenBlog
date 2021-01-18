@@ -40,7 +40,11 @@ const Header = (): JSX.Element => {
 		<Container className="mb-4">
 			<Navbar expand="lg" variant="light">
 				<Link href="/">
-					<Navbar.Brand>{"Toto's DevBlog"}</Navbar.Brand>
+					<Navbar.Brand>
+						<Link href="/">
+							<a className="atitle">{"Toto's DevBlog"}</a>
+						</Link>
+					</Navbar.Brand>
 				</Link>
 
 				<Navbar.Toggle />

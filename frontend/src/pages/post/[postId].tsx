@@ -7,19 +7,19 @@ import { sendQuery } from '../../libs/graphql';
 import { IPost } from '../../types';
 
 const PostPage = ({ post }: { post: IPost }): JSX.Element => {
-    return (
-        <MainContainer>
-            <h1 className="text-center">{post.title}</h1>
-            <p>{post.description}</p>
-            <Markdown escapeHtml={true} source={post.content} />
-        </MainContainer>
-    );
+	return (
+		<MainContainer>
+			<h1 className="text-center">{post.title}</h1>
+			<p className="text-center text-muted">{post.description}</p>
+			<Markdown escapeHtml={true} source={post.content} />
+		</MainContainer>
+	);
 };
 
 PostPage.getInitialProps = async ({
-    query: { postId },
+	query: { postId },
 }): Promise<{ post: IPost }> => {
-    const res = await sendQuery(gql`
+	const res = await sendQuery(gql`
     	{
     		Post(id: ${postId}) {
     			title
@@ -32,9 +32,9 @@ PostPage.getInitialProps = async ({
     	}
     `);
 
-    return {
-        post: res.Post,
-    };
+	return {
+		post: res.Post,
+	};
 };
 
 export default PostPage;

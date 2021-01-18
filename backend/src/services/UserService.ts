@@ -2,10 +2,16 @@
 import { hash, verify } from 'argon2';
 import { Service /* , Inject */ } from 'typedi';
 import { getRepository } from 'typeorm';
+import { sign } from 'jsonwebtoken';
 
 import { IUser, MyContext } from '../types/main';
-import { UserUpdateInput } from '../types/UserTypes';
+import { UserAuth, UserUpdateInput } from '../types/UserTypes';
 import { User } from '../entities/UserEntity';
+
+const {
+	JWT_SEED = 'secretJWT',
+	JWT_EXPIRATION = 24 * 60 * 60 * 1000,
+} = process.env;
 
 @Service()
 export class UserService {
@@ -60,18 +66,20 @@ export class UserService {
 	// Custom Services
 	async userLogin(
 		email: string,
-		password: string,
-		ctx: MyContext
-	): Promise<User | null> {
+		password: string
+		//ctx: MyContext
+	): Promise<UserAuth | null> {
 		const user = await this.findOne({ email });
-		if (!user || !verify(user.password, password))
+		if (!user || !(await verify(user.password, password)))
 			throw new Error('Invalid User');
 
-		ctx.req.session.userId = user.id;
+		//ctx.req.session.userId = user.id;
 
-		console.log(ctx.req.session);
+		const token = sign({ id: user.id, email: user.email }, JWT_SEED, {
+			expiresIn: JWT_EXPIRATION,
+		});
 
-		return user;
+		return { user, token };
 	}
 
 	async userLogout(ctx: MyContext): Promise<boolean> {

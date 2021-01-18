@@ -4,8 +4,8 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { config } from 'dotenv-safe';
 import cors from 'cors';
-import session from 'express-session';
-import connectRedis from 'connect-redis';
+//import session from 'express-session';
+//import connectRedis from 'connect-redis';
 import {
 	fieldExtensionsEstimator,
 	getComplexity,
@@ -18,20 +18,20 @@ import connectDB from './config/typeorm';
 import { UserResolver } from './resolvers/UserResolver';
 import { PostResolver } from './resolvers/PostResolvers';
 import { IndexResolver } from './resolvers/IndexResolvers';
-import { redis } from './redis';
+//import { redis } from './config/redis';
 
 const {
 	PORT = 65000,
 	CORS_ORIGIN = `http://localhost:3000`, // your frontend domain
 	NODE_ENV = 'dev',
-	SESSION_SECRET = 'secret123',
+	//SESSION_SECRET = 'secret123',
 } = process.env;
 
 async function main() {
 	const app = express();
-	const RedisStore = connectRedis(session);
+	//const RedisStore = connectRedis(session);
 
-	if (NODE_ENV != 'pro' || !NODE_ENV) config({ allowEmptyValues: true });
+	if (NODE_ENV != 'pro') config({ allowEmptyValues: true });
 
 	// Middlewares
 	app.use(cookieParser());
@@ -41,7 +41,7 @@ async function main() {
 			origin: CORS_ORIGIN,
 		})
 	);
-	app.use(
+	/* app.use(
 		session({
 			store: new RedisStore({
 				client: redis,
@@ -49,14 +49,14 @@ async function main() {
 			name: 'tdevblog',
 			secret: SESSION_SECRET,
 			resave: false,
-			saveUninitialized: false,
+			saveUninitialized: true,
 			cookie: {
 				httpOnly: true,
 				secure: NODE_ENV === 'pro',
 				maxAge: 24 * 60 * 60 * 1000, // 1 days
 			},
 		})
-	);
+	); */
 
 	// Init Apollo Server
 	const schema = await buildSchema({
@@ -99,7 +99,7 @@ async function main() {
 
 		await connectDB(); // Connect to Database
 
-		if (!NODE_ENV || NODE_ENV === 'dev')
+		if (NODE_ENV != 'pro')
 			console.log(`\tGraphql server in http://localhost:${PORT}/api`);
 	});
 }

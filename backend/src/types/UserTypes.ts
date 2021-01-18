@@ -1,4 +1,6 @@
-import { Field, InputType } from 'type-graphql';
+import { Field, InputType, ObjectType } from 'type-graphql';
+
+import { User } from '../entities/UserEntity';
 
 @InputType()
 export class UserInput {
@@ -25,4 +27,13 @@ export class UserUpdateInput {
 
 	@Field(() => String, { nullable: true })
 	username?: string;
+}
+
+@ObjectType()
+export class UserAuth {
+	@Field(() => User)
+	user!: User;
+
+	@Field(() => String)
+	token!: string;
 }
