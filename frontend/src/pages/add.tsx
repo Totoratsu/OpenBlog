@@ -45,7 +45,8 @@ const add = (): JSX.Element => {
 					description,
 					content,
 					id: user.id,
-				}
+				},
+				user.token
 			);
 
 			Router.push('/');

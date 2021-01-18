@@ -10,7 +10,7 @@ const PostPage = ({ post }: { post: IPost }): JSX.Element => {
 	return (
 		<MainContainer>
 			<h1 className="text-center">{post.title}</h1>
-			<p>{post.description}</p>
+			<p className="text-center text-muted">{post.description}</p>
 			<Markdown escapeHtml={true} source={post.content} />
 		</MainContainer>
 	);

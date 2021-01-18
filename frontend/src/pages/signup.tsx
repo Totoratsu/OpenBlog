@@ -4,7 +4,6 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import Router from 'next/router';
 import { useDispatch } from 'react-redux';
 
-import Footer from '../components/Footer';
 import MainContainer from '../components/MainContainer';
 import { sendQuery } from '../libs/graphql';
 import { userAuth } from '../libs/redux/actions';

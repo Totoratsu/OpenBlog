@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import Footer from '../components/Footer';
 import MainContainer from '../components/MainContainer';
 import { sendQuery } from '../libs/graphql';
 import { userAuth } from '../libs/redux/actions';
@@ -25,22 +24,26 @@ const signin = (): JSX.Element => {
 		try {
 			const res = await sendQuery(gql`
                 mutation {
-                    user: userLogin(
+                    auth: userLogin(
                         email: "${email}",
                         password: "${password}"
                     ){
-						id
-                        username
-						email
+						user{
+							id
+							username
+							email
+						}
+						token
 					}
                 }
 			`);
 
 			dispatch(
 				userAuth({
-					id: res.user.id,
-					username: res.user.username,
-					email: res.user.email,
+					id: res.auth.user.id,
+					username: res.auth.user.username,
+					email: res.auth.user.email,
+					token: res.auth.token,
 				})
 			);
 			Router.push('/');

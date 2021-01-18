@@ -10,6 +10,10 @@ export interface MyContext {
 		};
 	};
 	res: Response;
+	session: {
+		// Cookie info
+		userId: string | number;
+	};
 }
 
 export interface IUser {

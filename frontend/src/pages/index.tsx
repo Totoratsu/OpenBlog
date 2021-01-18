@@ -4,11 +4,9 @@ import Link from 'next/link';
 
 import { IPost } from '../types';
 import MainContainer from '../components/MainContainer';
-//import SearchBar from '../components/SearchBar';
 import { sendQuery } from '../libs/graphql';
 import PostCard from '../components/PostCard';
 import { Col, Row, Container } from 'react-bootstrap';
-import Footer from '../components/Footer';
 
 const index = ({ posts }: { posts: IPost[] }): JSX.Element => {
 	return (
@@ -20,11 +18,6 @@ const index = ({ posts }: { posts: IPost[] }): JSX.Element => {
 				</Container>
 			</main>
 
-			{/* <Row className="justify-content-md-center">
-				<Col md={8}>
-					<SearchBar className="mt-3 mb-4 p-2" />
-				</Col>
-			</Row> */}
 			<hr />
 			<Row>
 				{posts.map((post, i) => (

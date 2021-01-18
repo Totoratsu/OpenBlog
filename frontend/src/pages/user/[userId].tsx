@@ -2,7 +2,6 @@ import { gql } from 'graphql-request';
 import React from 'react';
 import Router from 'next/router';
 
-import Footer from '../../components/Footer';
 import MainContainer from '../../components/MainContainer';
 import { sendQuery } from '../../libs/graphql';
 import { IUser } from '../../types';

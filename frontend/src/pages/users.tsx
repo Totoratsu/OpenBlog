@@ -1,7 +1,6 @@
 import { gql } from 'graphql-request';
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import Footer from '../components/Footer';
 
 import MainContainer from '../components/MainContainer';
 import SearchBar from '../components/SearchBar';
