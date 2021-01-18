@@ -5,9 +5,8 @@ git:
 
 branches:
   only:
-    - master
+    - main
     - stable
-    - dev
 
 cache:
   directories:

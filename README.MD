@@ -1,6 +1,7 @@
 # OpenBlog
 
-[![Build Status](https://travis-ci.com/Totoratsu/Toto-s-DevBlog.svg?token=bUaEUjeCpySmegEBGAiw&branch=main)](https://travis-ci.com/Totoratsu/Toto-s-DevBlog)
+[![Build Status](https://travis-ci.com/Totoratsu/OpenBlog.svg?branch=main)](https://travis-ci.com/Totoratsu/OpenBlog)
+
 OpenBlog is a simple blog template created to help people create their own personal blog in a quicker and easier way.
 
 ## Tech/framework used
@@ -19,6 +20,15 @@ OpenBlog is a simple blog template created to help people create their own perso
   </p>
 
 ## Screenshots
+
+- Home Page
+  ![Home page](https://res.cloudinary.com/totoscloud/image/upload/v1610998699/openblog2_wjtfvl.png)
+
+- Add new post page
+  ![Add new post page](https://res.cloudinary.com/totoscloud/image/upload/v1610998699/openblog1_fdlfzo.png)
+
+- Post page
+  ![Post page](https://res.cloudinary.com/totoscloud/image/upload/v1610998699/openblog3_olqet0.png)
 
 ## Contributing
 
