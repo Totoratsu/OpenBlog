@@ -16,14 +16,14 @@ matrix:
   include:
     # Backend
     - language: node_js
-      script: cd backend
-      script: yarn install
-      #script: yarn test
-      script: yarn build
+      script:
+        - cd backend
+        - yarn install
+        - yarn build
 
       # Frontend
     - language: node_js
-      script: cd frontend
-      script: yarn install
-      #script: yarn test
-      script: yarn build
+      script:
+        - cd frontend
+        - yarn install
+        - yarn build
