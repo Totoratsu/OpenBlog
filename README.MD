@@ -1,6 +1,7 @@
 # OpenBlog
 
 [![Build Status](https://travis-ci.com/Totoratsu/Toto-s-DevBlog.svg?token=bUaEUjeCpySmegEBGAiw&branch=main)](https://travis-ci.com/Totoratsu/Toto-s-DevBlog)
+
 OpenBlog is a simple blog template created to help people create their own personal blog in a quicker and easier way.
 
 ## Tech/framework used
