@@ -33,7 +33,7 @@ const posts = ({ tags, posts }: IProps): JSX.Element => {
 			<Row className="justify-content-md-center">
 				<Col md={9}>
 					<SearchBar
-						className="mb-2 pb-2 mt-4 pt-4"
+						className="mb-2 pb-2 mt-3 pt-3"
 						handler={handleSearchBar}
 						value={term}
 					/>
@@ -53,11 +53,19 @@ const posts = ({ tags, posts }: IProps): JSX.Element => {
 
 				<Col>
 					<Row>
-						{filteredList.map((post, i) => (
-							<Col md={4} className="mt-4 mb-4" key={i}>
-								<PostCard item={post} />
+						{filteredList.length > 0 ? (
+							filteredList.map((post, i) => (
+								<Col md={4} className="mt-4 mb-4" key={i}>
+									<PostCard item={post} />
+								</Col>
+							))
+						) : (
+							<Col md={12} className="mt-4 pt-4">
+								<p className="text-center text-muted mt-4 pt-4">
+									Post not found {':('}
+								</p>
 							</Col>
-						))}
+						)}
 					</Row>
 				</Col>
 			</Row>

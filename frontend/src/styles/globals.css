@@ -1,3 +1,7 @@
+:root {
+	--footer: 5%;
+}
+
 html,
 body {
 	padding: 0;
@@ -18,4 +22,18 @@ a {
 .atitle:hover {
 	color: #35383a;
 	text-decoration: none;
+}
+
+#body {
+	min-height: 75vh;
+	position: relative;
+	margin: 0;
+	padding-bottom: var(--footer);
+	box-sizing: border-box;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	height: var(--footer);
 }

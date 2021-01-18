@@ -17,9 +17,12 @@ const MainContainer = ({ title, children, className }: props): JSX.Element => {
 			<Head>
 				<title>{title ? title : "Toto's DevBlog"}</title>
 			</Head>
-			<Header />
 
-			{children}
+			<div id="body">
+				<Header />
+
+				{children}
+			</div>
 
 			<hr className="mt-4 pt-4" />
 			<Footer />

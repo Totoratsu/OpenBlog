@@ -1,6 +1,7 @@
 import { gql } from 'graphql-request';
 import React from 'react';
 import Router from 'next/router';
+import { Button, Col, Row } from 'react-bootstrap';
 
 import MainContainer from '../../components/MainContainer';
 import { sendQuery } from '../../libs/graphql';
@@ -26,11 +27,21 @@ const UserPage = ({ user }: { user: IUser }): JSX.Element => {
 	return (
 		<MainContainer>
 			<h1 className="text-center">{user.username}</h1>
-			<p>{user.email}</p>
-			<hr />
-			<button onClick={() => Router.push('/add')}>Add new Post</button>
-			<hr />
-			<button onClick={handleLogout}>Logout</button>
+			<p className="text-center text-muted">{user.email}</p>
+			<br />
+			<Row>
+				<Col md={2}>
+					<Button variant="primary" onClick={() => Router.push('/add')}>
+						Add new Post
+					</Button>
+				</Col>
+
+				<Col md={2}>
+					<Button variant="danger" onClick={handleLogout}>
+						Logout
+					</Button>
+				</Col>
+			</Row>
 		</MainContainer>
 	);
 };

@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 import React, { useState } from 'react';
-import { Col, Row, Form, Button } from 'react-bootstrap';
+import { Col, Row, Form, Button, Card } from 'react-bootstrap';
 import Markdown from 'react-markdown';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
@@ -8,15 +8,20 @@ import Router from 'next/router';
 import MainContainer from '../components/MainContainer';
 import { sendQuery } from '../libs/graphql';
 import { IUserAuth } from '../types';
+import Link from 'next/link';
 
 const add = (): JSX.Element => {
 	const user = useSelector((state: { user: IUserAuth }) => state.user);
 
 	const [err, setError] = useState('');
 
-	const [content, setContent] = useState('');
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
+	const [title, setTitle] = useState('Lorems Post');
+	const [description, setDescription] = useState(
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	);
+	const [content, setContent] = useState(
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.'
+	);
 
 	async function handleCreatePost(): Promise<void> {
 		try {
@@ -57,13 +62,22 @@ const add = (): JSX.Element => {
 
 	return (
 		<MainContainer>
+			<div className="mb-4 mt-4 p-4">
+				<h2>Write a post in Markdown!</h2>
+				<Link href="https://markdown-guide.readthedocs.io/en/latest/basics.html">
+					<a target="blank">Markdown Docs</a>
+				</Link>
+			</div>
+
+			<hr />
 			<p className="text-center text-danger mt-4 mb-4">{err}</p>
-			<Row className="d-flex justify-content-between">
+			<Row className="d-flex justify-content-between mt-4">
 				<Col md={6}>
+					<h3 className="text-center">Content</h3>
 					<Form>
 						<Form.Group controlId="">
-							<Form.Label>Post Content in MarkDown:</Form.Label>
 							<br />
+							<Form.Label>Title</Form.Label>
 							<Form.Control
 								size="lg"
 								type="text"
@@ -72,6 +86,7 @@ const add = (): JSX.Element => {
 								value={title}
 							/>
 							<br />
+							<Form.Label>Description</Form.Label>
 							<Form.Control
 								placeholder="Description"
 								as="textarea"
@@ -80,6 +95,7 @@ const add = (): JSX.Element => {
 								value={description}
 							/>
 							<br />
+							<Form.Label>Content</Form.Label>
 							<Form.Control
 								placeholder="Post content ..."
 								as="textarea"
@@ -88,16 +104,24 @@ const add = (): JSX.Element => {
 								value={content}
 							/>
 							<br />
-							<Button variant="success" onClick={handleCreatePost}>
+							<Button variant="primary" onClick={handleCreatePost}>
 								Add new Post
 							</Button>
 						</Form.Group>
 					</Form>
 				</Col>
+
 				<Col md={6}>
-					<h1 className="text-center">{title}</h1>
-					<p className="text-center text-muted">{description}</p>
-					<Markdown escapeHtml={true} source={content} />
+					<h3 className="text-center">Preview</h3>
+					<br />
+
+					<Card>
+						<Card.Body>
+							<h1 className="text-center">{title}</h1>
+							<p className="text-center text-muted">{description}</p>
+							<Markdown escapeHtml={true} source={content} />
+						</Card.Body>
+					</Card>
 				</Col>
 			</Row>
 		</MainContainer>
