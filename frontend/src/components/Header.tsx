@@ -42,7 +42,7 @@ const Header = (): JSX.Element => {
 				<Link href="/">
 					<Navbar.Brand>
 						<Link href="/">
-							<a className="atitle">{"Toto's DevBlog"}</a>
+							<a className="atitle">OpenBlog</a>
 						</Link>
 					</Navbar.Brand>
 				</Link>

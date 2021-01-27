@@ -1,0 +1,29 @@
+os: osx
+
+git:
+  depth: 3
+
+branches:
+  only:
+    - main
+    - stable
+
+cache:
+  directories:
+    - node_modules
+
+matrix:
+  include:
+    # Backend
+    - language: node_js
+      script:
+        - cd backend
+        - yarn install
+        - yarn build
+
+      # Frontend
+    - language: node_js
+      script:
+        - cd frontend
+        - yarn install
+        - yarn build
