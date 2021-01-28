@@ -1,6 +1,6 @@
 # OpenBlog
 
-[![Build Status](https://travis-ci.com/Totoratsu/OpenBlog.svg?branch=main)](https://travis-ci.com/Totoratsu/OpenBlog)
+[![CircleCI](https://circleci.com/gh/Totoratsu/OpenBlog/tree/main.svg?style=svg)](https://circleci.com/gh/Totoratsu/OpenBlog/tree/main)
 
 OpenBlog is a simple blog template created to help people create their own personal blog in a quicker and easier way.
 
@@ -15,7 +15,7 @@ OpenBlog is a simple blog template created to help people create their own perso
 	<img height="52px" src="https://typegraphql.com/img/logo.png"/>
 	<img height="52px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fraw.githubusercontent.com%2Fgithub%2Fexplore%2F80688e429a7d4ef2fca1e82350fe8e3517d3494d%2Ftopics%2Fredis%2Fredis.png&f=1&nofb=1"/>
     <img height="52px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F29%2FPostgresql_elephant.svg%2F155px-Postgresql_elephant.svg.png&f=1&nofb=1"/> 
-    <img height="52px" src="https://cdn.iconscout.com/icon/free/png-512/travis-1-283376.png" /> 
+    <img height="52px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdashboard.snapcraft.io%2Fsite_media%2Fappmedia%2F2018%2F02%2Fcircleci-logo-x256_1kgTXiI.png&f=1&nofb=1" /> 
     <img height="52px" src="https://wipdeveloper.com/posts/2017/01/images/yarn-kitten1.png" />
   </p>
 

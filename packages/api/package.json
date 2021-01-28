@@ -1,6 +1,6 @@
 {
-	"name": "backend",
-	"version": "1.0.0",
+	"name": "openblog-api",
+	"version": "0.0.0",
 	"description": "",
 	"main": "app.js",
 	"scripts": {
