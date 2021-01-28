@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "ci:test": "lerna run test --since",
-    "ci: build": "lerna run build --since",
+    "ci:build": "lerna run build --since",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff"
   }
