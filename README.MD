@@ -1,6 +1,6 @@
 # OpenBlog
 
-[![Build Status](https://travis-ci.com/Totoratsu/OpenBlog.svg?branch=main)](https://travis-ci.com/Totoratsu/OpenBlog)
+[![CircleCI](https://circleci.com/gh/Totoratsu/OpenBlog/tree/dev.svg?style=svg)](https://circleci.com/gh/Totoratsu/OpenBlog/tree/dev)
 
 OpenBlog is a simple blog template created to help people create their own personal blog in a quicker and easier way.
 

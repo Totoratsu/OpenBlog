@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "ci:test": "lerna run test --since",
-    "ci:build": "lerna run build --since",
+    "ci:build": "lerna run build --since --scope=openblog-api",
     "new-version": "lerna version --conventional-commits --yes",
-    "diff": "lerna diff"
+    "diff": "lerna diff",
+    "format": "lerna run format"
   }
 }

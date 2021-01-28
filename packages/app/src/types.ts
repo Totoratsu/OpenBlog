@@ -27,7 +27,7 @@ export interface IAction {
 }
 
 export interface InitialState {
-	user?: { id: number; username: string; email: string };
+	user?: { id: number; username: string; email: string; token: string };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
